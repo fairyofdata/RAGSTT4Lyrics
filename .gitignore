@@ -36,3 +36,6 @@ firebase-debug.log
 # Lyric data (copyright): kept in the private LLM_STT_Songfinder-data repo, see docs/DATA.md
 line_metadata.json
 song_metadata.json
+
+# Local working files with lyrics or voice recordings (never commit)
+private/
