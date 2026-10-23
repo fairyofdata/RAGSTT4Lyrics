@@ -19,6 +19,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from audio_local_eval import UNSPLIT_CHARS, window  # noqa: E402
 from common import REPO_ROOT, SongDB  # noqa: E402
 from perturb import kata_to_hira  # noqa: E402
+sys.path.insert(0, REPO_ROOT)
+from search import parse_tags  # noqa: E402
 import queries as Q  # noqa: E402
 
 PRIVATE = os.path.join(REPO_ROOT, 'private')
@@ -96,11 +98,19 @@ def main():
         candidates.append((song, lines))
     picks = sorted(random.Random(SEED).sample(candidates, N_ITEMS), key=lambda p: p[0])
 
+    # optional mood notes written by hand (private/recording_gist.json: item -> one or two sentences)
+    gist_path = os.path.join(PRIVATE, 'recording_gist.json')
+    gists = json.load(open(gist_path, encoding='utf-8')) if os.path.exists(gist_path) else {}
+
     out, key = [HEADER, '## Part A: 대본\n'], {}
     for n, (song, lines) in enumerate(picks, 1):
         item = f'A{n:02d}'
         meta = db.song_metadata[song]
         out.append(f"\n### {item} · {meta.get('artist')} — {meta.get('title')} (곡 #{song})\n")
+        tags = ', '.join(parse_tags(meta.get('tags_normalized', '[]')))
+        out.append(f"\n> **곡 분위기:** {meta.get('summary', '')} ({tags})  \n")
+        if item in gists:
+            out.append(f"> **감정 흐름:** {gists[item]}\n")
         unknown_all = []
         for x in lines:
             text = db.line_text(x).strip()
