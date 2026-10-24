@@ -1,147 +1,139 @@
----
-title: URFIT - LLM STT based J-POP Playlist Community
-emoji: 🎵
-colorFrom: indigo
-colorTo: yellow
-sdk: gradio
-sdk_version: 5.41.0
-app_file: app.py
-pinned: false
----
+[🇰🇷 한국어 (Korean)](README_kr.md) | [🇯🇵 日本語 (Japanese)](README_jp.md)
 
-# Songfinder : URFIT 팀 프로젝트의 음성·음악 매칭 모듈 (리팩토링 버전)
+# Songfinder: the voice and lyric search module of the URFIT team project
 
-> 🏆 **한국무역협회 제47기 SCIT Master 프로젝트 발표회 우수상 (2위)** — 6인 팀 프로젝트 URFIT으로 수상  
-> 👤 이 레포는 URFIT 중 백지헌이 혼자 맡은 음성 인식·검색·추천·Spotify 연동 모듈이며, 2026년 리팩토링도 혼자 진행했습니다.  
-> ⚠️ **알림**: 본 레포지토리는 기존 [Huggingface Space](https://huggingface.co/spaces/fairyofdata/JPOP_STT_Module/tree/main)에서 구동되던 프로토타입을 **모던 웹 애플리케이션 아키텍처(Angular + FastAPI)** 로 완벽히 분리 및 리팩토링한 버전입니다. 이제 로컬 환경은 물론 Firebase, Cloud Run 등 다양한 클라우드 환경에 유연하게 배포할 수 있습니다.
+> 🏆 **Excellence Award (2nd place), 47th SCIT Master project presentation, Korea International Trade Association**, won with the six-person team project URFIT.
+> 👤 This repository is the part of URFIT I built alone: speech recognition, search, recommendation and Spotify integration. I also did the 2026 refactoring and the evaluation on my own.
+> ℹ️ It started as a prototype on Hugging Face Spaces and was rebuilt as an Angular frontend and a FastAPI backend.
 
-![URFIT UI Preview](./Sample.png)
+![URFIT screen](./Sample.png)
 
-URFIT은 "음성인식 기반 AI 플레이리스트 생성 커뮤니티"로, 머릿속에 맴도는 희미한 가사를 말하거나 입력하면 원하는 J-POP을 찾아주는 서비스입니다. 음성은 Whisper로 가사를 받아 적은 뒤 검색하므로, 가사 없는 콧노래·멜로디만으로 찾는 기능은 아닙니다. 기존 노래 검색 서비스의 한계인 '부정확한 가사로는 검색 불가'와 '단순 검색 이후의 확장성 부족'을 해결하기 위해 기획되었습니다. UR-FIT은 아래를 중의적으로 함축하여 모두 프로젝트의 목적과 정체성을 담아 지어진 프로젝트명입니다. 
->  * 한국어: 얼핏 듣다 (얼핏 들은 노래를 찾아주고, 해당 노래를 듣고 공유할 수 있는 플랫폼)
->  * 영어: Your(UR) Fit (Music Recognition & Recommendation)
->  * 일본어: 運命のリズム、触れ合う意味の繋がり。
+URFIT is a voice-driven AI playlist community. You say or type the lyrics you half remember, and it finds the J-POP song.
+- Speech is transcribed with Whisper and the text is searched, so it does not find songs from humming or melody alone.
+- It was planned to fix two limits of existing song search: inexact lyrics find nothing, and nothing follows once a song is found.
 
-## 🎵 주요 기능
+The name URFIT carries three meanings:
+>  * Korean: 얼핏 (eolpit), "half heard": a place to find, play and share songs you only half heard
+>  * English: Your (UR) Fit, music recognition and recommendation
+>  * Japanese: 運命のリズム、触れ合う意味の繋がり。
 
-  * **‘대충 아는 가사’로 ‘그 노래’ 찾기**: 불분명한 가사를 말하거나 입력해도 노래를 찾아줍니다. 얼마나 잘 찾는지는 아래 「평가」 절에 숫자로 정리했습니다.
-  * **AI 기반 유사 곡 추천**: 검색된 곡의 가사, 분위기, 장르 등을 복합적으로 분석하여 사용자 취향에 맞는 유사한 곡 3개를 추천합니다.
-  * **Spotify 플레이리스트 생성**: 추천받은 곡들을 한 번에 모아 Spotify 플레이리스트로 만들 수 있습니다.
-  * **AI 플레이리스트 타이틀/설명 생성**: OpenAI의 GPT 모델이 추천 곡들의 특징을 분석해 창의적인 플레이리스트 제목과 설명을 자동으로 생성합니다.
-  * **커뮤니티 기능**: 검색한 곡과 플레이리스트를 다른 사용자와 공유하고 소통할 수 있는 커뮤니티 기능을 제공합니다.
+## 🎵 Features
+
+  * **Find a song from half-remembered lyrics:** say or type inexact lyrics and get the song. How often it works is in "At a glance" below.
+  * **Similar songs:** three recommendations based on the lyrics, mood and tags of the song found.
+  * **Spotify playlists:** save the recommendations as a Spotify playlist.
+  * **Playlist title and description:** an OpenAI GPT model writes them from the songs' characteristics.
+  * **Community:** share searched songs and playlists with other users.
 
 -----
 
-## 🔍 한눈에 보기
+## 🔍 At a glance
 
-![Songfinder 구조와 평가 범위](./docs/assets/architecture.png)
+![Songfinder architecture and evaluation scope](./docs/assets/architecture.png)
 
-점선 상자인 **곡 식별 단계를 따로 떼어 정량 평가**했습니다. 결과는 합성 질의와 TTS 음성 기준이라 실사용 정확도는 아닙니다. 사람의 녹음·노래·콧노래는 재지 않았습니다.
+I evaluated the **song identification step** (dashed box) on its own. The numbers come from synthetic queries built from the indexed lyrics and from TTS speech, so they are not real-world accuracy. Human recordings, singing and humming were not measured.
 
-- **가사를 입력할 때:** 1순위 60.6%, 10위 안 76.2%. 오타에는 강하고(79.8%), 앞부분만 기억할 때는 약합니다(32.9%).
-- **가사를 말할 때 (앱 설정):** 일본어 원어민 발음 47%, **한국인 발음 36%**, 한 줄만 말하면 76%.
-- **원인 두 가지**
-  - Whisper가 한국인 발음의 35%를 한국어로 판단해 한글로 받아 적습니다.
-  - 가사를 한 줄씩 색인해서 길게 말할수록 못 찾습니다.
-- **개선 (앱 반영 후 실측):** 「한국어로 감지되면 일본어로 재전사」와 「여러 줄 질의는 줄 단위 조각 투표」를 넣어, 한국인 발음 36% → 69%, 원어민 5줄 47% → 74%가 됐습니다. 한 줄 질의와 입력 검색 결과는 예전과 같습니다.
-- **그 밖에 찾은 것:** 텍스트 검색 요약 분기의 인덱스 버그(수정함), 「못 찾음」 판정선이 DB에 없는 문장의 93%를 통과시키는 문제, 짧은 가사 줄이 오답을 끌어당기는 문제(둘 다 다음 단계).
+- **Typed lyrics:** the right song at rank 1 for 60.6% of queries, in the top 10 for 76.2%. Robust to typos (79.8%), weak when only the first half of a line is remembered (32.9%).
+- **Spoken lyrics (app settings):** 47% with native Japanese pronunciation, **36% with a Korean accent**, 76% when only one line is spoken.
+- **Two causes**
+  - Whisper hears 35% of Korean-accented Japanese as Korean and writes Hangul.
+  - The index is per lyric line, so the longer a user speaks, the worse it gets.
+- **Fixes (measured after shipping them in the app)**
+  - Transcribe again in Japanese when Whisper detects Korean.
+  - Let line-sized pieces of a multi-line query vote for the song.
+  - Korean-accented speech went from 36% to 69% and native five-line speech from 47% to 74%. One-line queries and text search behave as before.
+- **Other findings:** an index bug in the summary branch of text search (fixed). Two more are next on the list:
+  - The "not found" threshold lets 93% of sentences that are not in the database through.
+  - Very short lyric lines attract wrong matches.
 
-![Voice path before and after two fixes](./eval/results/voice_fixes.png)
+![Voice search before and after the fixes](./eval/results/voice_fixes.png)
 
-상세: [평가 상세](docs/EVALUATION.md) · [데이터 안내](docs/DATA.md) · [연구개발 기록](docs/RESEARCH_LOG.md) · [결정 기록(ADR)](docs/adr/README.md) · [이어서 할 일](docs/NEXT_STEPS.md)
+Detailed documents (in Korean): [evaluation](docs/EVALUATION.md) · [data](docs/DATA.md) · [research log](docs/RESEARCH_LOG.md) · [decision records (ADR)](docs/adr/README.md) · [next steps](docs/NEXT_STEPS.md)
 
 -----
 
-## 🛠 아키텍처 및 기술 스택 (리팩토링 적용)
+## 🛠 Architecture and stack
 
-기존 단일 애플리케이션 구조에서 확장성과 유지보수성을 위해 프론트엔드와 백엔드를 완벽히 분리했습니다.
+The single-application prototype was split into a frontend and a backend.
 
 ### 1. Frontend (Angular)
-  * **Framework**: Angular 17+ (기존 Vanilla JS/HTML 기반 코드 포팅)
-  * **Styling**: TailwindCSS, SCSS
-  * **주요 기능**: Spotify Web Playback SDK 연동, 마이크 오디오 스트림(MediaRecorder) 캡처 및 전송
+  * **Framework:** Angular 17 (ported from the original vanilla JS/HTML)
+  * **Styling:** TailwindCSS, SCSS
+  * **Features:** Spotify Web Playback SDK, microphone recording (MediaRecorder) and upload
 
 ### 2. Backend (FastAPI)
-  * **Framework**: FastAPI (Python 3.10+)
-  * **AI/ML**:
-      * OpenAI **Whisper** (STT 변환)
-      * **SentenceTransformer** (`paraphrase-multilingual-MiniLM-L12-v2`) 및 **FAISS** (가사 벡터 유사도 검색)
-      * OpenAI **GPT-3.5-turbo** (플레이리스트 제목 및 설명 자동 생성)
-  * **주요 기능**: Spotify OAuth 인증, STT 분석, 벡터 검색 API 제공, CORS 완벽 지원
+  * **Framework:** FastAPI (Python 3.10+)
+  * **AI/ML**
+      * OpenAI **Whisper**: speech to text
+      * **SentenceTransformer** (`paraphrase-multilingual-MiniLM-L12-v2`) + **FAISS**: lyric vector search (`search.py`)
+      * OpenAI **GPT-3.5-turbo**: playlist titles and descriptions
+  * **Features:** Spotify OAuth, voice and text search APIs, CORS settings
 
 -----
 
-## 🚀 로컬 실행 방법 (How to Run)
+## 🚀 Running locally
 
-프론트엔드와 백엔드 서버를 각각 실행해야 합니다.
+Run the frontend and the backend separately.
 
-### 사전 준비사항
-1. Python 3.10+ 설치 (오류 시 `audioop-lts` 등 추가 확인)
-2. Node.js (v18+) 및 npm 설치
-3. [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)에서 앱 생성 및 `Client ID`, `Client Secret` 획득
-   * **Redirect URI** 설정 필수: `http://localhost:7860/callback` (주의: https가 아닌 http 사용)
-4. `.env` 파일 (또는 환경변수) 설정: `OPENAI_API_KEY`, `SPOTIPY_CLIENT_ID`, `SPOTIPY_CLIENT_SECRET`, `SPOTIPY_REDIRECT_URI=http://localhost:7860/callback`
-5. 가사 데이터: 저작권 때문에 이 레포에 없습니다. `line_metadata.json`, `song_metadata.json`을 레포 루트에 두거나 `SONGFINDER_DATA_DIR`로 위치를 지정해야 앱이 동작합니다([데이터 안내](docs/DATA.md)).
+### Prerequisites
+1. Python 3.10+ (3.13+ may also need `audioop-lts`)
+2. Node.js 18+ and npm
+3. A Spotify app from the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) with its `Client ID` and `Client Secret`
+   * **Redirect URI:** `http://localhost:7860/callback` (http, not https)
+   * Apps in development mode only let allowlisted users log in (up to five as of 2026).
+4. A `.env` file or environment variables: `OPENAI_API_KEY`, `SPOTIPY_CLIENT_ID`, `SPOTIPY_CLIENT_SECRET`, `SPOTIPY_REDIRECT_URI=http://localhost:7860/callback`
+5. Lyric data: not in this repository for copyright reasons. Put `line_metadata.json` and `song_metadata.json` in the repository root or point `SONGFINDER_DATA_DIR` at them ([data](docs/DATA.md)).
 
-### 원클릭 실행 (Windows 전용)
-바탕화면 등에 제공된 `Start_JPOP_Finder.bat` 파일을 더블클릭하면 프론트엔드와 백엔드가 동시에 실행됩니다. (최초 실행 시 AI 모델 다운로드로 인해 1~2분 소요될 수 있습니다.)
-
-### 수동 실행
-**1. Backend 서버 실행**
+### Backend
 ```bash
 pip install -r requirements.txt
-# 파이썬 3.13 이상 환경에서 오류 시: pip install audioop-lts
 python app.py
 ```
-* 서버가 `http://localhost:7860`에서 구동됩니다. (첫 실행 시 수백 MB 모델이 캐시 다운로드됩니다.)
+* Serves on `http://localhost:7860`. The first start downloads the embedding model (a few hundred MB).
 
-**2. Frontend 서버 실행**
-새 터미널을 열고 다음을 실행합니다.
+### Frontend
+In a second terminal:
 ```bash
 cd frontend
 npm install
 npm start
 ```
-* 서버가 `http://localhost:4200`에서 구동됩니다. 브라우저로 해당 주소에 접속하세요.
+* Serves on `http://localhost:4200`.
 
-### 테스트
+### Tests
 ```bash
 pip install -r requirements-dev.txt
 pytest -q tests
 ```
-* 검색 모듈(`search.py`) 단위 테스트입니다. 가사 데이터가 있으면, 한 줄 질의가 예전 로직과 같은 곡을 고르는지 확인하는 통합 테스트도 함께 돕니다.
+* Tests for the search module (`search.py`). Unit tests use a synthetic index. With the lyric data present, an integration test also checks that one-line queries pick the same song as the previous logic.
 
 -----
 
-## 🖼️ 사용 가이드
+## 🖼️ How to use
 
-1. **검색 시작**: 메인 화면에서 **음성으로 찾기** 또는 **텍스트로 찾기** 버튼을 클릭합니다.
-2. **STT 검색**: 마이크 권한을 허용하고 5~15초간 기억나는 가사를 말해보세요(가사 없는 콧노래는 인식되지 않습니다).
-3. **결과 확인 및 재생**: FAISS 기반 검색 결과와 유사 곡들이 출력됩니다. Spotify 연동 후 Web Player로 바로 감상 가능합니다.
-4. **플레이리스트 생성**: "이 곡들로 플레이리스트 만들기"를 누르면 AI가 제목/설명을 생성하여 내 Spotify 계정에 직접 저장해줍니다.
-
------
-
-## 💡 프로젝트의 가치 및 향후 계획
-
-  * **AI 기술의 실용적 응용**: 사용자의 불편함을 해결하는 실용적인 서비스에 최신 AI 기술을 응용했습니다.
-  * **확장 가능한 서비스 설계**: 마이크로서비스 아키텍처(분리형 구조)를 통해 향후 기능 확장이 용이하도록 설계했습니다.
-  * **향후 계획**: 
-    - 평가로 근거가 생긴 검색 개선: 한국어 감지 시 일본어 재전사, 줄 단위 조각 투표, 짧은 가사 줄 묶어 색인, 판정선 재설정, 요약 분기 버그 수정 ([이어서 할 일](docs/NEXT_STEPS.md))
-    - 가나 읽기(발음) 기반 보조 색인으로 소리 비슷한 말·한국인 발음에 대한 강건성 개선
-    - 소수 인원의 실제 녹음으로 실사용 정확도 측정
-    - 청취 기록 기반의 개인화 추천 기능 도입
-    - Firebase Hosting (Frontend) + Cloud Run (Backend) 클라우드 배포 완전 자동화
-    - 모바일 앱 버전 (Ionic / React Native) 출시를 통한 접근성 강화
+1. **Start:** choose **음성으로 찾기** (search by voice) or **텍스트로 찾기** (search by text) on the main screen.
+2. **Voice search:** allow the microphone and say the lyrics you remember for 5 to 15 seconds. Humming without words is not recognized.
+3. **Results and playback:** the song found and the recommendations appear. After logging in to Spotify you can play them in the web player.
+4. **Playlist:** "이 곡들로 플레이리스트 만들기" (make a playlist from these songs) writes a title and description and saves the playlist to your Spotify account.
 
 -----
 
-### 프로젝트 개요
+## 💡 Next
 
-* **프로젝트명**: URFIT (음성인식 기반 AI 플레이리스트 생성 커뮤니티)
-* **개발 과정**: 한국무역협회 무역아카데미 Smart Cloud IT 과정 47기 프로젝트 (이후 모던 아키텍처 리팩토링)
-* **개발 기간**: 2025년 7월 29일 ~ 2025년 9월 29일 (초기), 2026년 리팩토링 진행
+  * Re-index very short lyric lines together with their neighbours, and set the "not found" threshold again
+  * A secondary index on kana readings (pronunciation), for sound-alike words and Korean-accented speech
+  * Measure accuracy on real users' recordings
+  * Spotify embed player for previews without login; deploy on Firebase Hosting (frontend) and Cloud Run (backend)
+  * Personalized recommendations from listening history
 
-### 저작권 고지
+-----
 
-이 자료의 저작권은 한국무역협회 무역아카데미 Smart Cloud IT 과정 47기 팀 "노래불러조"에게 있으며, 허가 없이 복제, 배포, 전송, 전시 등의 행위를 금지합니다.
+### Project
+
+* **Name:** URFIT, a voice-driven AI playlist community
+* **Program:** 47th Smart Cloud IT course, Korea International Trade Association Trade Academy; refactored afterwards
+* **Period:** July 29 to September 29, 2025 (initial development); refactoring in 2026
+
+### Copyright
+
+The copyright of this material belongs to team "노래불러조" of the 47th Smart Cloud IT course, Korea International Trade Association Trade Academy. Copying, distributing, transmitting or displaying it without permission is prohibited.
