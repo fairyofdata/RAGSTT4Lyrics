@@ -4,7 +4,7 @@
 
 ## 현재 상태
 
-- **2026-10-24 가사 데이터 분리:** `line_metadata.json`, `song_metadata.json`을 비공개 레포 `LLM_STT_Songfinder-data`로 옮겼습니다.
+- **2026-10-24 가사 데이터 분리:** `line_metadata.json`, `song_metadata.json`을 비공개 레포 `RAGSTT4Lyrics-data`로 옮겼습니다.
   - 공개 레포는 git 기록 전체에서 두 파일을 지우고 강제 push했습니다. 그래서 모든 커밋 번호가 바뀌었습니다.
   - 재작성 전 전체 백업은 `C:\Users\fairy\LLM_STT_Songfinder_backup_2026-10-24.bundle`에 있습니다.
   - 자세한 내용은 [DATA.md](DATA.md)에 있습니다.

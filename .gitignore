@@ -33,7 +33,7 @@ Thumbs.db
 .firebase/
 firebase-debug.log
 
-# Lyric data (copyright): kept in the private LLM_STT_Songfinder-data repo, see docs/DATA.md
+# Lyric data (copyright): kept in the private RAGSTT4Lyrics-data repo, see docs/DATA.md
 line_metadata.json
 song_metadata.json
 

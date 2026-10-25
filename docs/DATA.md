@@ -6,7 +6,7 @@ Songfinder는 J-POP 차트 곡 461개의 가사, 메타데이터, 임베딩을 �
 
 | 파일 | 내용 | 위치 |
 |---|---|---|
-| `line_metadata.json` | 가사 줄 22,806개 (`original_song_index`, `artist`, `title`, `line_text`) | **비공개** 레포 `LLM_STT_Songfinder-data` |
+| `line_metadata.json` | 가사 줄 22,806개 (`original_song_index`, `artist`, `title`, `line_text`) | **비공개** 레포 `RAGSTT4Lyrics-data` |
 | `song_metadata.json` | 곡 461개: 제목, 아티스트, Spotify·Bugs id, 앨범 커버 URL, 가사 원문, LLM 요약, 태그 | **비공개** |
 | `line_embeddings.npy` | 가사 줄 임베딩 22,806 × 384 (L2 정규화) | 공개 (Git LFS) |
 | `song_embeddings.npy`, `summary_embeddings.npy` | 곡·요약 임베딩 461 × 384 | 공개 (Git LFS) |
