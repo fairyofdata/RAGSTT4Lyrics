@@ -1,6 +1,8 @@
-[🇺🇸 English](README.md) | [🇯🇵 日本語 (Japanese)](README_jp.md)
+<!-- 원본: README_kr.md (한국어판이 원본, 영·일은 번역) · 동기화: 2026-10-26 -->
 
-# Songfinder: URFIT 팀 프로젝트의 음성·음악 매칭 모듈
+# RAGSTT4Lyrics — 흐릿하게 기억나는 가사로 J-POP 찾기 (Songfinder)
+
+[English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
 
 > 🏆 **한국무역협회 제47기 SCIT Master 프로젝트 발표회 우수상(2위).** 6인 팀 프로젝트 URFIT으로 받은 상입니다.
 > 👤 이 레포는 URFIT 중 백지헌이 혼자 맡은 음성 인식·검색·추천·Spotify 연동 모듈입니다. 2026년 리팩토링과 성능 평가도 혼자 진행했습니다.
@@ -16,6 +18,8 @@ URFIT이라는 이름에는 세 가지 뜻을 담았습니다.
 >  * 한국어: 얼핏 듣다 (얼핏 들은 노래를 찾아 주고, 듣고 공유하는 플랫폼)
 >  * 영어: Your(UR) Fit (Music Recognition & Recommendation)
 >  * 일본어: 運命のリズム、触れ合う意味の繋がり。
+
+저장소 이름 **RAGSTT4Lyrics**(옛 이름 `LLM_STT_Songfinder`, 모듈 이름 Songfinder)는 흐름을 그대로 적은 것입니다. 음성을 받아 적고(**STT**), 가사를 벡터로 검색하고(**R**etrieval), 검색된 곡의 요약·태그를 GPT 에 넘겨 플레이리스트 제목·설명을 씁니다(**G**eneration). 곡을 찾는 단계 자체는 LLM 없이 임베딩 검색으로 합니다.
 
 ## 🎵 주요 기능
 
@@ -118,6 +122,21 @@ pytest -q tests
 
 -----
 
+## 📁 구조
+
+```
+app.py                 FastAPI 백엔드 (STT, 검색·추천 API, Spotify, 플레이리스트 문구 생성)
+search.py              곡 식별·추천 (SongIndex: FAISS 검색, 조각 투표)
+*_embeddings.npy       가사 줄·곡·요약 임베딩 (search.py 가 루트에서 읽음, Git LFS)
+frontend/              Angular 프런트엔드
+eval/                  곡 식별 평가 스크립트와 결과
+tests/                 search.py 테스트
+notebooks/             데이터 수집·전처리·태그 생성 노트북 (2025년 개발 당시)
+docs/                  평가 상세, 데이터 안내, 연구개발 기록, ADR
+```
+
+-----
+
 ## 💡 향후 계획
 
   * 짧은 가사 줄을 앞뒤 줄과 묶어 다시 색인하고, '찾지 못함' 판정선을 다시 정하기
@@ -134,6 +153,8 @@ pytest -q tests
 * **과정:** 한국무역협회 무역아카데미 Smart Cloud IT 과정 47기 프로젝트, 이후 리팩토링
 * **기간:** 2025년 7월 29일 ~ 9월 29일(초기 개발), 2026년 리팩토링
 
-### 저작권 고지
+### 라이선스와 저작권
 
-이 자료의 저작권은 한국무역협회 무역아카데미 Smart Cloud IT 과정 47기 팀 "노래불러조"에 있으며, 허가 없이 복제, 배포, 전송, 전시하는 것을 금지합니다.
+* 이 저장소의 **코드**는 [Apache License 2.0](LICENSE) 을 따릅니다 (첫 커밋부터 적용).
+* **URFIT** 서비스 이름과 기획, 팀 발표 자료는 한국무역협회 무역아카데미 Smart Cloud IT 과정 47기 팀 "노래불러조"의 것입니다.
+* **가사**는 저작권 때문에 저장소에 포함하지 않습니다 ([데이터 안내](docs/DATA.md)).

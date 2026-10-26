@@ -18,3 +18,4 @@ LocalTTS 자체의 결정은 그 저장소의 `docs/adr/`에 따로 있습니다
 | [0011](0011-korean-speaker-approximation.md) | 한국인 발음은 한글 독음 변환 + 한국어 TTS로 근사한다 | 2026-10-21 |
 | [0012](0012-estimate-fixes-from-existing-transcripts.md) | 개선안 효과는 앱을 바꾸지 않고 기존 전사문으로 추정하고, 따로 떼어 둔 질의로 확인한다 | 2026-10-22 |
 | [0013](0013-search-module-and-voice-fixes.md) | 검색을 모듈로 분리하고, 음성 개선 두 가지를 조건부로 넣는다 | 2026-10-23 |
+| [0014](0014-readme-source-license-layout.md) | README 원본은 한국어, 코드는 Apache-2.0, 노트북은 notebooks/ 로 | 2026-10-26 |

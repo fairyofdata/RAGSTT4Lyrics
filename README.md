@@ -1,6 +1,8 @@
-[🇰🇷 한국어 (Korean)](README_kr.md) | [🇯🇵 日本語 (Japanese)](README_jp.md)
+<!-- Source: README_kr.md (Korean is the source; English and Japanese are translations) · synced 2026-10-26 -->
 
-# Songfinder: the voice and lyric search module of the URFIT team project
+# RAGSTT4Lyrics — find a J-POP song from half-remembered lyrics (Songfinder)
+
+[English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
 
 > 🏆 **Excellence Award (2nd place), 47th SCIT Master project presentation, Korea International Trade Association**, won with the six-person team project URFIT.
 > 👤 This repository is the part of URFIT I built alone: speech recognition, search, recommendation and Spotify integration. I also did the 2026 refactoring and the evaluation on my own.
@@ -16,6 +18,8 @@ The name URFIT carries three meanings:
 >  * Korean: 얼핏 (eolpit), "half heard": a place to find, play and share songs you only half heard
 >  * English: Your (UR) Fit, music recognition and recommendation
 >  * Japanese: 運命のリズム、触れ合う意味の繋がり。
+
+The repository name **RAGSTT4Lyrics** (formerly `LLM_STT_Songfinder`; the module is called Songfinder) spells out the flow: transcribe speech (**STT**), search the lyrics by vector (**R**etrieval), and hand the summaries and tags of the songs found to GPT to write the playlist title and description (**G**eneration). Finding the song itself is embedding search, with no LLM.
 
 ## 🎵 Features
 
@@ -118,6 +122,21 @@ pytest -q tests
 
 -----
 
+## 📁 Layout
+
+```
+app.py                 FastAPI backend (STT, search and recommendation APIs, Spotify, playlist text)
+search.py              song identification and recommendation (SongIndex: FAISS search, window voting)
+*_embeddings.npy       line, song and summary embeddings (read from the root by search.py, Git LFS)
+frontend/              Angular frontend
+eval/                  song identification evaluation scripts and results
+tests/                 tests for search.py
+notebooks/             data collection, preprocessing and tagging notebooks (from the 2025 build)
+docs/                  evaluation, data notes, research log, ADRs
+```
+
+-----
+
 ## 💡 Next
 
   * Re-index very short lyric lines together with their neighbours, and set the "not found" threshold again
@@ -134,6 +153,8 @@ pytest -q tests
 * **Program:** 47th Smart Cloud IT course, Korea International Trade Association Trade Academy; refactored afterwards
 * **Period:** July 29 to September 29, 2025 (initial development); refactoring in 2026
 
-### Copyright
+### License and copyright
 
-The copyright of this material belongs to team "노래불러조" of the 47th Smart Cloud IT course, Korea International Trade Association Trade Academy. Copying, distributing, transmitting or displaying it without permission is prohibited.
+* The **code** in this repository is licensed under the [Apache License 2.0](LICENSE) (since the first commit).
+* The **URFIT** name, its planning and the team's presentation materials belong to team "노래불러조" of the 47th Smart Cloud IT course, Korea International Trade Association Trade Academy.
+* **Lyrics** are not included in this repository for copyright reasons ([data](docs/DATA.md)).
