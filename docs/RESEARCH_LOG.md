@@ -54,7 +54,7 @@
 - **채택:** ELECTRA·디퓨전식 단어 치환과 누락, 한국인 발음을 음차로 흉내 내기 ([ADR-0008](adr/0008-memory-error-perturbations.md), [ADR-0011](adr/0011-korean-speaker-approximation.md))
 - **기각:** '짧으면 천천히 읽히자'. 내용 양과 말 속도가 뒤섞이기 때문이다. 대신 무음 패딩으로 한 줄 조건(S)을 만들었다. ([ADR-0007](adr/0007-app-length-voice-queries.md))
 
-## 4. LocalTTS 구축 (`C:\Users\fairy\LocalTTS`, 별도 저장소)
+## 4. LocalTTS 구축 (`%USERPROFILE%\LocalTTS`, 별도 저장소)
 
 평가용 음성을 비용 없이 만들고 다른 프로젝트에서도 쓰려고 만들었다. ([ADR-0006](adr/0006-local-tts-stt-service.md), 세부는 LocalTTS 저장소의 `docs/adr/`)
 
@@ -147,7 +147,7 @@
 | 평가 코드 | `eval/` (common, queries, negatives, run_eval, check_against_app, audio_eval, stats, perturb, run_noise, review_sheet, audio_local_eval, audio_fixes, data_quality, plot) |
 | 결과 | `eval/results/*.json` (가사 없음), 차트 6장 |
 | 문서 | `README.md` 개요, `docs/EVALUATION.md`(평가 상세), `docs/PORTFOLIO.md`, 도식 2장, 이 기록, `docs/adr/`, `docs/NEXT_STEPS.md` |
-| 레포 밖 | `C:\Users\fairy\LocalTTS` (로컬 git), `~/.cache/songfinder_eval/` (가사가 담긴 음성·전사문·검수 시트) |
+| 레포 밖 | `%USERPROFILE%\LocalTTS` (로컬 git), `~/.cache/songfinder_eval/` (가사가 담긴 음성·전사문·검수 시트) |
 
 ## 10. 교훈
 

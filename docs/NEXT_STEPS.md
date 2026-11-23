@@ -6,14 +6,14 @@
 
 - **2026-10-24 가사 데이터 분리:** `line_metadata.json`, `song_metadata.json`을 비공개 레포 `RAGSTT4Lyrics-data`로 옮겼습니다.
   - 공개 레포는 git 기록 전체에서 두 파일을 지우고 강제 push했습니다. 그래서 모든 커밋 번호가 바뀌었습니다.
-  - 재작성 전 전체 백업은 `C:\Users\fairy\LLM_STT_Songfinder_backup_2026-10-24.bundle`에 있습니다.
+  - 재작성 전 전체 백업은 `%USERPROFILE%\LLM_STT_Songfinder_backup_2026-10-24.bundle`에 있습니다.
   - 자세한 내용은 [DATA.md](DATA.md)에 있습니다.
 - **2026-10-23 서비스 단계 시작:** 브랜치 `service/search-quality`에서 검색을 `search.py`로 분리하고, 요약 분기 버그와 음성 개선 두 가지를 반영했습니다. 테스트 10개(`tests/`)와 전후 실측(`eval/compare_impl.py`)을 추가했습니다. 판정선, 짧은 줄 색인, 가사가 붙은 곡은 다음 단계입니다.
 
 - **Songfinder:** 평가 코드, 결과, README, 포트폴리오 초안, 기록 문서를 모두 커밋했습니다.
   - **GitHub에 push 완료** (2026-10-22, `origin/master`).
   - **Hugging Face Space**는 가사가 든 옛 기록을 그대로 갖고 있어 비공개로 전환합니다(아래 '사용자가 할 일').
-- **LocalTTS** (`C:\Users\fairy\LocalTTS`): 별도 git 저장소이고 원격이 없습니다. 로컬 커밋만 했습니다.
+- **LocalTTS** (`%USERPROFILE%\LocalTTS`): 별도 git 저장소이고 원격이 없습니다. 로컬 커밋만 했습니다.
 - **앱 코드:** 2026-10-23부터 서비스 단계로 수정 중입니다([ADR-0013](adr/0013-search-module-and-voice-fixes.md)).
 - **OpenAI API 사용:** 약 $0.50(`whisper-1` 음성 시험 1회)이 전부입니다.
 - **LocalTTS 서버:** 정지했습니다(GPU 메모리 반환).
@@ -40,7 +40,7 @@ Space(`fairyofdata/JPOP_STT_Module`)에는 가사 데이터 파일이 든 옛 �
 
 ## 사용자가 할 일: 사람 검수
 
-1. `C:\Users\fairy\.cache\songfinder_eval\review\review_sheet_seed0.csv`를 엽니다(Excel 가능, UTF-8 BOM).
+1. `%USERPROFILE%\.cache\songfinder_eval\review\review_sheet_seed0.csv`를 엽니다(Excel 가능, UTF-8 BOM).
 2. 100행마다 `rating (0/1/2)` 칸을 채웁니다.
    - 2: 사람이 이렇게 잘못 기억할 법함
    - 1: 애매함
@@ -55,7 +55,7 @@ Space(`fairyofdata/JPOP_STT_Module`)에는 가사 데이터 파일이 든 옛 �
 ## 재개 방법
 
 ```bash
-C:\Users\fairy\LocalTTS\venv\Scripts\python.exe -m localtts serve --port 8880
+%USERPROFILE%\LocalTTS\venv\Scripts\python.exe -m localtts serve --port 8880
 ```
 
 - 위 명령은 로컬 음성 실험을 다시 돌릴 때만 필요합니다. Claude Code 데스크톱에서는 `.claude/launch.json`의 `localtts` 설정으로 미리보기 서버로 띄울 수 있습니다. 이 파일은 커밋하지 않았습니다.
@@ -83,6 +83,6 @@ C:\Users\fairy\LocalTTS\venv\Scripts\python.exe -m localtts serve --port 8880
 | `~/.cache/songfinder_eval/audio_local/` | 1.4GB | 가사 TTS 음성과 전사문 | 재추정에 필요. 끝나면 삭제 가능 |
 | `~/.cache/songfinder_eval/review/` | — | 검수 시트와 유형 대응표 | 판정 전에는 지우지 말 것 |
 | `~/.cache/huggingface/hub` | 11GB | Whisper large-v3, Kokoro, Supertonic, XLM-R, MiniLM 등 | 다른 프로젝트 모델과 공유 |
-| `C:\Users\fairy\LocalTTS\venv` | 5.5GB | — | |
+| `%USERPROFILE%\LocalTTS\venv` | 5.5GB | — | |
 | 레포 `venv` | 1.6GB | — | gitignore 대상 |
 | `.claude/launch.json` | — | — | 미추적. 원하면 `.gitignore`에 추가 |
