@@ -155,6 +155,6 @@ docs/                  evaluation, data notes, research log, ADRs
 
 ### License and copyright
 
-* The **code** in this repository is licensed under the [Apache License 2.0](LICENSE) (since the first commit).
+* The **code** in this repository is licensed under the [MIT License](LICENSE) (from 2026-11-24; earlier commits were released under the Apache License 2.0).
 * The **URFIT** name, its planning and the team's presentation materials belong to team "노래불러조" of the 47th Smart Cloud IT course, Korea International Trade Association Trade Academy.
 * **Lyrics** are not included in this repository for copyright reasons ([data](docs/DATA.md)).
