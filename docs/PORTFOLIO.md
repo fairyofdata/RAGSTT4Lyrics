@@ -1,11 +1,11 @@
-# Songfinder: 흐릿하게 기억나는 가사로 J-POP 곡 찾기
+# RAGSTT4Lyrics: 흐릿하게 기억나는 가사로 J-POP 곡 찾기
 
 > 🏆 한국무역협회 제47기 SCIT Master 프로젝트 발표회 우수상(2위). 6인 팀 프로젝트 **URFIT**으로 받은 상입니다.
 > 👤 이 레포는 URFIT 중 제가 혼자 맡은 **음성 인식·검색·추천·Spotify 연동 모듈**입니다. 2026년 리팩토링과 아래 성능 평가도 혼자 했습니다.
 
 가사 일부를 **말하거나 입력하면** 어떤 곡인지 찾아 주고, 비슷한 곡 3개를 추천해 Spotify 플레이리스트로 만들어 줍니다.
 
-![Songfinder 구조와 평가 범위](assets/architecture.png)
+![RAGSTT4Lyrics 구조와 평가 범위](assets/architecture.png)
 
 ---
 

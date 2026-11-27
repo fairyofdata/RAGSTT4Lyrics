@@ -20,3 +20,4 @@ LocalTTS 자체의 결정은 그 저장소의 `docs/adr/`에 따로 있습니다
 | [0013](0013-search-module-and-voice-fixes.md) | 검색을 모듈로 분리하고, 음성 개선 두 가지를 조건부로 넣는다 | 2026-10-23 |
 | [0014](0014-readme-source-license-layout.md) | README 원본은 한국어, 코드는 Apache-2.0(→ 0015에서 MIT로), 노트북은 notebooks/ 로 | 2026-10-26 |
 | [0015](0015-license-mit.md) | 코드 라이선스를 MIT로 바꾼다 | 2026-11-24 |
+| [0016](0016-drop-songfinder-name.md) | 공개 문서의 표기 이름을 RAGSTT4Lyrics 하나로 한다(0014의 괄호 표기 대체) | 2026-11-27 |

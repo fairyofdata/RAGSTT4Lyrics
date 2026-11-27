@@ -1,6 +1,6 @@
-<!-- 原本: README_kr.md（韓国語版が原本、英語・日本語は翻訳） · 同期: 2026-10-26 -->
+<!-- 原本: README_kr.md（韓国語版が原本、英語・日本語は翻訳） · 同期: 2026-11-27 -->
 
-# RAGSTT4Lyrics — うろ覚えの歌詞から J-POP を探す (Songfinder)
+# RAGSTT4Lyrics — うろ覚えの歌詞から J-POP を探す
 
 [English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
 
@@ -19,7 +19,7 @@ URFITという名前には三つの意味を込めています。
 >  * 英語：Your (UR) Fit（Music Recognition & Recommendation）
 >  * 日本語：運命のリズム、触れ合う意味の繋がり。
 
-リポジトリ名 **RAGSTT4Lyrics**（旧名 `LLM_STT_Songfinder`、モジュール名 Songfinder）は処理の流れをそのまま表しています。音声を書き起こし（**STT**）、歌詞をベクトルで検索し（**R**etrieval）、見つかった曲の要約・タグを GPT に渡してプレイリストのタイトルと説明を書きます（**G**eneration）。曲を特定する段階そのものは、LLM を使わない埋め込み検索です。
+リポジトリ名 **RAGSTT4Lyrics**（旧名 `LLM_STT_Songfinder`）は処理の流れをそのまま表しています。音声を書き起こし（**STT**）、歌詞をベクトルで検索し（**R**etrieval）、見つかった曲の要約・タグを GPT に渡してプレイリストのタイトルと説明を書きます（**G**eneration）。曲を特定する段階そのものは、LLM を使わない埋め込み検索です。
 
 ## 🎵 主な機能
 
@@ -33,7 +33,7 @@ URFITという名前には三つの意味を込めています。
 
 ## 🔍 概要
 
-![Songfinderの構成と評価範囲](./docs/assets/architecture.png)
+![RAGSTT4Lyricsの構成と評価範囲](./docs/assets/architecture.png)
 
 点線の枠で示した**曲の特定段階だけを切り出して定量評価**しました。数値は、索引済みの歌詞から作った合成クエリとTTS音声による値で、実際の利用時の精度ではありません。人の録音、歌唱、鼻歌は測定していません。
 

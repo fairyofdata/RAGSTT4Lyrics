@@ -2,6 +2,7 @@
 
 - 상태: 채택
 - 결정일: 2026-10-26
+- 일부 대체: 코드 라이선스 → ADR-0015, 「Songfinder 는 괄호로 남긴다」 → ADR-0016
 
 ## 맥락
 - 저장소 이름이 `LLM_STT_Songfinder` 에서 `RAGSTT4Lyrics` 로 바뀌었는데 README 제목은 Songfinder 였고, 이름의 "RAG" 를 설명하지 않았다.

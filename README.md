@@ -1,6 +1,6 @@
-<!-- Source: README_kr.md (Korean is the source; English and Japanese are translations) · synced 2026-10-26 -->
+<!-- Source: README_kr.md (Korean is the source; English and Japanese are translations) · synced 2026-11-27 -->
 
-# RAGSTT4Lyrics — find a J-POP song from half-remembered lyrics (Songfinder)
+# RAGSTT4Lyrics — find a J-POP song from half-remembered lyrics
 
 [English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
 
@@ -19,7 +19,7 @@ The name URFIT carries three meanings:
 >  * English: Your (UR) Fit, music recognition and recommendation
 >  * Japanese: 運命のリズム、触れ合う意味の繋がり。
 
-The repository name **RAGSTT4Lyrics** (formerly `LLM_STT_Songfinder`; the module is called Songfinder) spells out the flow: transcribe speech (**STT**), search the lyrics by vector (**R**etrieval), and hand the summaries and tags of the songs found to GPT to write the playlist title and description (**G**eneration). Finding the song itself is embedding search, with no LLM.
+The repository name **RAGSTT4Lyrics** (formerly `LLM_STT_Songfinder`) spells out the flow: transcribe speech (**STT**), search the lyrics by vector (**R**etrieval), and hand the summaries and tags of the songs found to GPT to write the playlist title and description (**G**eneration). Finding the song itself is embedding search, with no LLM.
 
 ## 🎵 Features
 
@@ -33,7 +33,7 @@ The repository name **RAGSTT4Lyrics** (formerly `LLM_STT_Songfinder`; the module
 
 ## 🔍 At a glance
 
-![Songfinder architecture and evaluation scope](./docs/assets/architecture.png)
+![RAGSTT4Lyrics architecture and evaluation scope](./docs/assets/architecture.png)
 
 I evaluated the **song identification step** (dashed box) on its own. The numbers come from synthetic queries built from the indexed lyrics and from TTS speech, so they are not real-world accuracy. Human recordings, singing and humming were not measured.
 
