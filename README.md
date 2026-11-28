@@ -1,8 +1,8 @@
-<!-- Source: README_kr.md (Korean is the source; English and Japanese are translations) · synced 2026-11-27 -->
+<!-- Source: README_KR.md (Korean is the source; English and Japanese are translations) · synced 2026-11-27 -->
 
 # RAGSTT4Lyrics — find a J-POP song from half-remembered lyrics
 
-[English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
+[English](README.md) · [한국어](README_KR.md) · [日本語](README_JP.md)
 
 > 🏆 **Excellence Award (2nd place), 47th SCIT Master project presentation, Korea International Trade Association**, won with the six-person team project URFIT.
 > 👤 This repository is the part of URFIT I built alone: speech recognition, search, recommendation and Spotify integration. I also did the 2026 refactoring and the evaluation on my own.

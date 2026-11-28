@@ -1,6 +1,6 @@
 # 곡 식별 성능 평가 (상세)
 
-Songfinder의 **곡 식별 단계**(가사를 입력하거나 말했을 때 원래 곡을 찾는가)를 정량 평가한 기록입니다. 개요는 [README](../README_kr.md#-한눈에-보기), 진행 과정은 [연구개발 기록](RESEARCH_LOG.md), 결정 이유는 [ADR](adr/README.md)에 있습니다. 아래 명령은 모두 레포 루트에서 실행합니다.
+Songfinder의 **곡 식별 단계**(가사를 입력하거나 말했을 때 원래 곡을 찾는가)를 정량 평가한 기록입니다. 개요는 [README](../README_KR.md#-한눈에-보기), 진행 과정은 [연구개발 기록](RESEARCH_LOG.md), 결정 이유는 [ADR](adr/README.md)에 있습니다. 아래 명령은 모두 레포 루트에서 실행합니다.
 
 ![평가 설계](assets/eval_design.png)
 

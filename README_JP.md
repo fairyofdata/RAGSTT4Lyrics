@@ -1,8 +1,8 @@
-<!-- 原本: README_kr.md（韓国語版が原本、英語・日本語は翻訳） · 同期: 2026-11-27 -->
+<!-- 原本: README_KR.md（韓国語版が原本、英語・日本語は翻訳） · 同期: 2026-11-27 -->
 
 # RAGSTT4Lyrics — うろ覚えの歌詞から J-POP を探す
 
-[English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
+[English](README.md) · [한국어](README_KR.md) · [日本語](README_JP.md)
 
 > 🏆 **韓国貿易協会 第47期 SCIT Master プロジェクト発表会 優秀賞（2位）。** 6人チームのプロジェクトURFITで受賞しました。
 > 👤 このリポジトリは、URFITのうちペク・ジホン（Jiheon Baek）が一人で担当した音声認識・検索・推薦・Spotify連携モジュールです。2026年のリファクタリングと性能評価も一人で行いました。

@@ -1,8 +1,8 @@
-<!-- 원본: README_kr.md (한국어판이 원본, 영·일은 번역) · 동기화: 2026-11-27 -->
+<!-- 원본: README_KR.md (한국어판이 원본, 영·일은 번역) · 동기화: 2026-11-27 -->
 
 # RAGSTT4Lyrics — 흐릿하게 기억나는 가사로 J-POP 찾기
 
-[English](README.md) · [한국어](README_kr.md) · [日本語](README_jp.md)
+[English](README.md) · [한국어](README_KR.md) · [日本語](README_JP.md)
 
 > 🏆 **한국무역협회 제47기 SCIT Master 프로젝트 발표회 우수상(2위).** 6인 팀 프로젝트 URFIT으로 받은 상입니다.
 > 👤 이 레포는 URFIT 중 백지헌이 혼자 맡은 음성 인식·검색·추천·Spotify 연동 모듈입니다. 2026년 리팩토링과 성능 평가도 혼자 진행했습니다.
